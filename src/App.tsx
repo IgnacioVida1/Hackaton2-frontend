@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/Login.tsx";
-import Register from "./pages/Register.tsx";
+
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import PaginaPrincipal from "./pages/PaginaPrincipal";
 import SelectorMes from "./components/SelectorMes";
 import { TokenProvider } from "./context/TokenContext";
@@ -13,12 +14,15 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
+          {/* Redirección raíz al login */}
           <Route path="/" element={<Navigate to="/login" replace />} />
+
+          {/* Páginas públicas */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
-          {/* Acceso libre, sin token */}
           <Route path="/selector-mes" element={<SelectorMes />} />
+
+          {/* Página principal del resumen de gastos */}
           <Route path="/expenses-summary/:year/:month" element={<PaginaPrincipal />} />
         </Routes>
       </Router>
